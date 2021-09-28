@@ -2,9 +2,12 @@
 import GameSavingLoader from './GameSavingLoader';
 import GameSaving from './GameSaving';
 
-GameSavingLoader.load().then((saving) => {
-  const gameSaving = new GameSaving(JSON.parse(saving));
-  console.log(gameSaving);
-}, (error) => {
-  console.log(error);
-});
+(async () => {
+  try {
+    const saving = await GameSavingLoader.load();
+    const gameSaving = new GameSaving(JSON.parse(saving));
+    console.log(gameSaving);
+  } catch (error) {
+    console.log(error);
+  }
+})();
